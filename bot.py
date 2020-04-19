@@ -8,18 +8,36 @@ def doesNothing(txt):
     return txt
 client=discord.Client()
 
+def embed(title="제목",*args,des="",foo=""):
+    global em
+    embed = discord.Embed(title=str(title), description=str(des), color=0x62c1cc)
+    embed.set_footer(text=str(foo))
+    for i in args:
+        if str(type(i))!="<class 'tuple'>":
+            break
+        if len(i)!=2:
+            break
+        embed.add_field(name=i[0], value=i[1], inline=True)
+    em=embed
+
 @client.event
 async def on_ready():
     print('Logged in as')
     print(client.user.name)
     print(client.user.id)
     print('------')
-    
+
 @client.event
 async def on_message(message):
     #await message.channel.send("test")
     if message.author == client.user:
         return
+    elif (message.content.split()[0]=="!embed"):
+        try:
+            eval("embed(%s)" % message.content.split(maxsplit=1)[1])
+            await message.channel.send(embed=em)
+        except:
+            await message.channel.send("잘못된 구문입니다.")
     elif (message.content=="!MEE6 MEE6"):
         await message.channel.send("Not A MEE6")
     elif (message.content.split()[0]=="!me"):
