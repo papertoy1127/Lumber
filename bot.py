@@ -95,5 +95,6 @@ async def on_message(message):
             else:
                 await message.channel.send(sendMsg+"```")
 
-client.run("NzAwOTUyNzAxMzg2NzUyMDYw.XpqdBQ.m22Ea6u8U5TBPeVfbAnc3FJ-JB0")
+access_token=os.environ["BOT_TOKEN"]
+client.run(access_token)
 
