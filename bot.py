@@ -2,15 +2,15 @@ import discord
 import asyncio
 import time
 import os
-from math import *
+#from math import *
 
 def doesNothing(txt):
     return txt
 client=discord.Client()
 
-def embed(title="제목",*args,des="",foo=""):
+def embed(title="제목",*args,des="",foo="",color=0x62c1cc):
     global em
-    embed = discord.Embed(title=str(title), description=str(des), color=0x62c1cc)
+    embed = discord.Embed(title=str(title), description=str(des), color=color)
     embed.set_footer(text=str(foo))
     for i in args:
         if str(type(i))!="<class 'tuple'>":
@@ -34,6 +34,7 @@ async def on_message(message):
         return
     elif (message.content.split()[0]=="!embed"):
         try:
+            await message.channel.send("%s님의 임베드" % message.author.mention)
             eval("embed(%s)" % message.content.split(maxsplit=1)[1])
             await message.channel.send(embed=em)
         except:
@@ -94,5 +95,5 @@ async def on_message(message):
             else:
                 await message.channel.send(sendMsg+"```")
 
-access_token=os.environ["BOT_TOKEN"]
-client.run(access_token)
+client.run("NzAwOTUyNzAxMzg2NzUyMDYw.XpqdBQ.m22Ea6u8U5TBPeVfbAnc3FJ-JB0")
+
