@@ -33,12 +33,11 @@ async def on_message(message):
     if message.author == client.user:
         return
     elif (message.content.split()[0]=="!embed"):
-        if True:
-        #try:
+        try:
             eval('embed(%s,foo="%s님의 임베드")' % (message.content.split(maxsplit=1)[1],message.author))
             await message.channel.send(embed=em)
-        #except:
-           # await message.channel.send("잘못된 구문입니다.")
+        except:
+           await message.channel.send("잘못된 구문입니다.")
     elif (message.content=="!MEE6 MEE6"):
         await message.channel.send("Not A MEE6")
     elif (message.content.split()[0]=="!me"):
