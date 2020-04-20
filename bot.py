@@ -8,7 +8,7 @@ def doesNothing(txt):
     return txt
 client=discord.Client()
 
-def embed(title="제목",*args,des="",foo="",color=0x62c1cc):
+def embed(title="제목",*args,des="",color=0x62c1cc,foo=""):
     global em
     embed = discord.Embed(title=str(title), description=str(des), color=color)
     embed.set_footer(text=str(foo))
@@ -34,8 +34,7 @@ async def on_message(message):
         return
     elif (message.content.split()[0]=="!embed"):
         try:
-            await message.channel.send("%s님의 임베드" % message.author.mention)
-            eval("embed(%s)" % message.content.split(maxsplit=1)[1])
+            eval("embed(%s,"%s님의 임베드")" % message.content.split(maxsplit=1)[1],message.author.mention)
             await message.channel.send(embed=em)
         except:
             await message.channel.send("잘못된 구문입니다.")
