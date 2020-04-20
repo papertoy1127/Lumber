@@ -34,7 +34,7 @@ async def on_message(message):
         return
     elif (message.content.split()[0]=="!embed"):
         try:
-            eval("embed(%s,foo="%s님의 임베드")" % message.content.split(maxsplit=1)[1],message.author.mention)
+            eval('embed(%s,foo="%s님의 임베드")' % message.content.split(maxsplit=1)[1],message.author.mention)
             await message.channel.send(embed=em)
         except:
             await message.channel.send("잘못된 구문입니다.")
