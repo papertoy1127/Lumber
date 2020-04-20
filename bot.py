@@ -29,6 +29,10 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    ch = client.get_channel(701698774711402507)
+    if message.channel == ch:
+        return
+    await ch.send("[%s:%s:%s:%s] %s" %(time.strftime('%c', time.localtime(time.time())),message.guild,message.channel,message.author,message.content))
     #await message.channel.send("test")
     if message.author == client.user:
         return
@@ -94,6 +98,9 @@ async def on_message(message):
                 await message.channel.send("```%s도는 현재 얼불춤에서 만들 수 없습니다.```" % (getAngle))
             else:
                 await message.channel.send(sendMsg+"```")
+
+@client.event
+async def on_message(message):
 
 access_token=os.environ["BOT_TOKEN"]
 client.run(access_token)
