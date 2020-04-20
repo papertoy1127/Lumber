@@ -36,6 +36,7 @@ async def on_message(message):
         try:
             eval('embed(%s,foo="%s님의 임베드")' % (message.content.split(maxsplit=1)[1],message.author))
             await message.channel.send(embed=em)
+            await message.delete()
         except:
            await message.channel.send("잘못된 구문입니다.")
     elif (message.content=="!MEE6 MEE6"):
