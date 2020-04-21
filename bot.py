@@ -13,7 +13,7 @@ async def on_ready():
     print('------')
     await client.change_presence(status=discord.Status.dnd, activity=discord.Game('아무것도 안'))
         
-'''def embed(title="제목",*args,des="",color=0x62c1cc,foo=""):
+def embed(title="제목",*args,des="",color=0x62c1cc,foo=""):
     embed = discord.Embed(title=str(title), description=str(des), color=color)
     embed.set_footer(text=str(foo))
     for i in args:
@@ -22,18 +22,19 @@ async def on_ready():
         if len(i)!=2:
             break
         embed.add_field(name=i[0], value=i[1], inline=True)
-    return embed'''
+    return embed
 
 @client.event
 async def on_message(message):
+    global qjsgh
     if message.author == client.user:
         return
-    '''elif (message.content.split()[0]=="!embed"):
+    elif (message.content.split()[0]=="!embed"):
         try:
             await message.channel.send(embed=eval('embed(%s,foo="%s님의 임베드")' % (message.content.split(maxsplit=1)[1],message.author)))
             await message.delete()
         except:
-            awair message.channel.send("님 잘못쓴듯 아니면 봇 오류입니다")'''
+            await message.channel.send("님 잘못쓴듯 아니면 봇 오류입니다")
     if message.content.startswith('!투표'):
         if True:
             await message.delete()
