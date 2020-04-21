@@ -79,5 +79,5 @@ async def on_message(message):
                                                     else:
                                                         await choose.add_reaction('🔢')
 
-access_token=os.environ["BOT_TOKEN"]
-client.run(access_token)
+#access_token=os.environ["BOT_TOKEN"]
+client.run("NzAwOTUyNzAxMzg2NzUyMDYw."+"Xp8INQ.AMWgUYw-ZcjZ3JYooghsutFPTPI")
