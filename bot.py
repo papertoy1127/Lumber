@@ -56,50 +56,6 @@ async def on_message(message):
             await message.delete()
         except:
            await message.channel.send("잘못된 구문입니다.")
-    if message.content.startswith('!투표'):
-        if True:
-            await message.delete()
-            qjsgh = 0
-            vote = message.content[4:].split("/")
-            embed = discord.Embed(title='주제 - [' + vote[0] + ']', color=0x62c1cc)
-            for i in range(1, len(vote)):
-                qjsgh += 1
-                embed.add_field(name=qjsgh, value=vote[i], inline=False)
-            choose = await message.channel.send(embed=embed)
-            qjsgh = 0
-            for i in range(1, len(vote)):
-                qjsgh += 1
-                if qjsgh == 1:
-                    await choose.add_reaction('1️⃣')
-                else:
-                    if qjsgh == 2:
-                        await choose.add_reaction('2️⃣')
-                    else:
-                        if qjsgh == 3:
-                            await choose.add_reaction('3️⃣')
-                        else:
-                            if qjsgh == 4:
-                                await choose.add_reaction('4️⃣')
-                            else:    
-                                if qjsgh == 5:
-                                    await choose.add_reaction('5️⃣')
-                                else:    
-                                    if qjsgh == 6:
-                                        await choose.add_reaction('6️⃣')
-                                    else:
-                                        if qjsgh == 7:
-                                            await choose.add_reaction('7️⃣')
-                                        else:
-                                            if qjsgh == 8:
-                                                await choose.add_reaction('8️⃣')
-                                            else:
-                                                if qjsgh == 9:
-                                                    await choose.add_reaction('9️⃣')
-                                                else:    
-                                                    if qjsgh == 10:
-                                                        await choose.add_reaction('🔟')
-                                                    else:
-                                                        await choose.add_reaction('🔢')
 
 #access_token=os.environ["BOT_TOKEN"]
 client.run("NzAwOTUyNzAxMzg2NzUyMDYw."+"Xp8INQ.AMWgUYw-ZcjZ3JYooghsutFPTPI")
