@@ -55,65 +55,50 @@ async def on_message(message):
             await message.channel.send(embed=eval('embed(%s,foo="%s님의 임베드")' % (message.content.split(maxsplit=1)[1],message.author)))
             await message.delete()
         except:
-           await message.channel.send("잘못된 구문입니다.")
-    elif (message.content=="!MEE6 MEE6"):
-        await message.channel.send("Not A MEE6")
-    elif (message.content.split()[0]=="!me"):
-        await message.channel.send(str(message.author.mention))
-    elif (message.content.split()[0]=="!you"):
-        await message.delete()
-        await message.channel.send(message.content.split(maxsplit=1)[1])
-    elif message.content.split()[0]=="!뻘문자":
-        await message.channel.send(bmj())
-    elif (message.content.split()[0]=="!각도계산"):
-        if message.content=="!각도계산":
-            await message.channel.send("!각도계산 <계산할 각도>")
-        else:
-            getAngle=str(message.content.split(maxsplit=1)[1])
-            if "/" in getAngle:
-                relativeAngle=int(eval(getAngle)*7)
-            elif getAngle.isnumeric():
-                relativeAngle=int(getAngle)*7
-            else:
-                await message.channel.send("```%s도는 현재 얼불춤에서 만들 수 없습니다.```" % (getAngle))
-                return
-            print(relativeAngle)
-            if getAngle=="360":
-                await message.channel.send("```스페이스 바를 눌러 360도를 만들 수 있습니다.```")
-                return
-            if getAngle=="0":
-                await message.channel.send("```탭 키를 눌러 탭드스핀을 만들 수 있습니다.\n실제 미드스핀을 원하신다면, 연구에 참여해주세요!```")
-                return
-            angles=(0,30,45,60,90,120,135,150,180,210,225,240,270,300)
-            check=0
-            sendMsg="```\n"
-            for i in angles:
-                #print(i)
-                for j in angles:
-                    #print(j)
-                    for k in range(5):
-                        #print(k)
-                        for m in range(7):
-                            #print(m)
-                            if relativeAngle==(((7*i+7*108*k+900*m)-7*j)%2520):
-                                print(str((((7*i+7*108*k+900*m))-7*j)%2520)+":")
-                                check+=1
-                                if k==0:
-                                    if m==0:
-                                        sendMsg=sendMsg+("%d도와 %d도로 %d도를 만들 수 있습니다." % ((i+108*k+(900/7)*m)%360,j,relativeAngle/7))+"\n"
+            awair message.channel.send("님 잘못쓴듯 아니면 봇 오류입니다")
+        if message.content.startswith('!투표'):
+            await message.delete()
+            qjsgh = 0
+            vote = message.content[4:].split("/")
+            embed = discord.Embed(title='주제 - [' + vote[0] + ']', color=0x62c1cc)
+            for i in range(1, len(vote)):
+                qjsgh += 1
+                embed.add_field(name=qjsgh, value=vote[i], inline=False)
+            choose = await message.channel.send(embed=embed)
+            qjsgh = 0
+            for i in range(1, len(vote)):
+                qjsgh += 1
+                if qjsgh == 1:
+                    await choose.add_reaction('1️⃣')
+                else:
+                    if qjsgh == 2:
+                        await choose.add_reaction('2️⃣')
+                    else:
+                        if qjsgh == 3:
+                            await choose.add_reaction('3️⃣')
+                        else:
+                            if qjsgh == 4:
+                                await choose.add_reaction('4️⃣')
+                            else:    
+                                if qjsgh == 5:
+                                    await choose.add_reaction('5️⃣')
+                                else:    
+                                    if qjsgh == 6:
+                                        await choose.add_reaction('6️⃣')
                                     else:
-                                        sendMsg=sendMsg+("%f도(%d + (900/7 × %d)도)와 %d도로 %s도를 만들 수 있습니다." % ((i+108*k+(900/7)*m)%360,i,m,j,getAngle))+"\n"
-                                else:
-                                    if m==0:
-                                        sendMsg=sendMsg+("%d도(%d + (108 × %d)도)와 %d도로 %d도를 만들 수 있습니다." % ((i+108*k+(900/7)*m)%360,i,k,j,relativeAngle/7))+"\n"
-                                    else:
-                                        sendMsg=sendMsg+("%f도(%d + (108 × %d) + (900/7 × %d)도)와 %d도로 %s도를 만들 수 있습니다." % ((i+108*k+(900/7)*m)%360,i,k,m,j,getAngle))+"\n"
-                           
-            if check==0:
-                await message.channel.send("```%s도는 현재 얼불춤에서 만들 수 없습니다.```" % (getAngle))
-            else:
-                await message.channel.send(sendMsg+"```")
-
+                                        if qjsgh == 7:
+                                            await choose.add_reaction('7️⃣')
+                                        else:
+                                            if qjsgh == 8:
+                                                await choose.add_reaction('8️⃣')
+                                            else:
+                                                if qjsgh == 9:
+                                                    await choose.add_reaction('9️⃣')
+                                                else:    
+                                                    if qjsgh == 10:
+                                                        await choose.add_reaction('🔟')
+                                                    else:
+                                                        await choose.add_reaction('🔢')
 access_token=os.environ["BOT_TOKEN"]
 client.run(access_token)
 
