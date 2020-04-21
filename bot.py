@@ -8,6 +8,21 @@ def doesNothing(txt):
     return txt
 client=discord.Client()
 
+def bmj():
+    mym=""
+    for i in range(random.randrange(15)):
+        int(i)
+        mym = mym+chr(random.randrange(0xAC00,0xD7A4))
+    return mym
+
+@client.event
+async def on_ready():
+    print('Logged in as')
+    print(client.user.name)
+    print(client.user.id)
+    print('------')
+    await client.change_presence(status=discord.Status.dnd, activity=discord.Game('아무것도 안'))
+        
 def embed(title="제목",*args,des="",color=0x62c1cc,foo=""):
     embed = discord.Embed(title=str(title), description=str(des), color=color)
     embed.set_footer(text=str(foo))
@@ -96,6 +111,8 @@ async def on_message(message):
                 await message.channel.send("```%s도는 현재 얼불춤에서 만들 수 없습니다.```" % (getAngle))
             else:
                 await message.channel.send(sendMsg+"```")
+    elif message.content.split()[0]=="!뻘문자":
+        await message.channel.send(bmj())
 
 access_token=os.environ["BOT_TOKEN"]
 client.run(access_token)
