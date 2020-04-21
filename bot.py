@@ -58,4 +58,4 @@ async def on_message(message):
            await message.channel.send("잘못된 구문입니다.")
 
 access_token=os.environ["BOT_TOKEN"]
-client.run("NzAwOTUyNzAxMzg2NzUyMDYw."+"Xp8INQ.AMWgUYw-ZcjZ3JYooghsutFPTPI")
+client.run(access_token)
