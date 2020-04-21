@@ -27,12 +27,11 @@ async def on_ready():
     print('------')
 
 @client.event
-'''async def on_message(message):
-    ch = client.get_channel(701698774711402507)
+async def on_message(message):
+    '''ch = client.get_channel(701698774711402507)
     if message.channel == ch:
         return
-    await ch.send("[%s:%s:%s:%s] %s" %(time.strftime('%c', time.localtime(time.time())),message.guild,message.channel,message.author,message.content))
-    ''' #await message.channel.send("test")
+    await ch.send("[%s:%s:%s:%s] %s" %(time.strftime('%c', time.localtime(time.time())),message.guild,message.channel,message.author,message.content))'''
     if message.author == client.user:
         return
     elif (message.content.split()[0]=="!embed"):
