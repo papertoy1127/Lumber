@@ -1,19 +1,11 @@
 import discord
 import asyncio
-import time
+#import time
 import os
-#from math import *
 
 def doesNothing(txt):
     return txt
 client=discord.Client()
-
-def bmj():
-    mym=""
-    for i in range(random.randrange(15)):
-        int(i)
-        mym = mym+chr(random.randrange(0xAC00,0xD7A4))
-    return mym
 
 @client.event
 async def on_ready():
@@ -33,13 +25,6 @@ def embed(title="제목",*args,des="",color=0x62c1cc,foo=""):
             break
         embed.add_field(name=i[0], value=i[1], inline=True)
     return embed
-
-@client.event
-async def on_ready():
-    print('Logged in as')
-    print(client.user.name)
-    print(client.user.id)
-    print('------')
 
 @client.event
 async def on_message(message):
