@@ -35,7 +35,7 @@ async def on_message(message):
             await message.delete()
         except:
             await message.channel.send("님 잘못쓴듯 아니면 봇 오류입니다")
-'''    if message.content.startswith('!투표'):
+    if message.content.startswith('!투표'):
         if True:
             await message.delete()
             qjsgh = 0
@@ -78,7 +78,7 @@ async def on_message(message):
                                                     if qjsgh == 10:
                                                         await choose.add_reaction('🔟')
                                                     else:
-                                                        await choose.add_reaction('🔢')'''
+                                                        await choose.add_reaction('🔢')
 
 #access_token=os.environ["BOT_TOKEN"]
 client.run("NzAwOTUyNzAxMzg2NzUyMDYw."+"Xp8INQ.AMWgUYw-ZcjZ3JYooghsutFPTPI")
