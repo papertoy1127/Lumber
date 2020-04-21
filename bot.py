@@ -55,7 +55,7 @@ async def on_message(message):
             await message.channel.send(embed=eval('embed(%s,foo="%s님의 임베드")' % (message.content.split(maxsplit=1)[1],message.author)))
             await message.delete()
         except:
-           await message.channel.send("잘못된 구문입니다.")
+            await message.channel.send("잘못된 구문입니다.")
 
 access_token=os.environ["BOT_TOKEN"]
 client.run(access_token)
