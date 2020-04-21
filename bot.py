@@ -63,6 +63,8 @@ async def on_message(message):
     elif (message.content.split()[0]=="!you"):
         await message.delete()
         await message.channel.send(message.content.split(maxsplit=1)[1])
+    elif message.content.split()[0]=="!뻘문자":
+        await message.channel.send(bmj())
     elif (message.content.split()[0]=="!각도계산"):
         if message.content=="!각도계산":
             await message.channel.send("!각도계산 <계산할 각도>")
@@ -111,8 +113,6 @@ async def on_message(message):
                 await message.channel.send("```%s도는 현재 얼불춤에서 만들 수 없습니다.```" % (getAngle))
             else:
                 await message.channel.send(sendMsg+"```")
-    elif message.content.split()[0]=="!뻘문자":
-        await message.channel.send(bmj())
 
 access_token=os.environ["BOT_TOKEN"]
 client.run(access_token)
