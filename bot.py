@@ -1,9 +1,19 @@
 import discord
 import asyncio
-#import time
+import time
 import os
+#from math import *
 
+def doesNothing(txt):
+    return txt
 client=discord.Client()
+
+def bmj():
+    mym=""
+    for i in range(random.randrange(15)):
+        int(i)
+        mym = mym+chr(random.randrange(0xAC00,0xD7A4))
+    return mym
 
 @client.event
 async def on_ready():
@@ -25,7 +35,19 @@ def embed(title="제목",*args,des="",color=0x62c1cc,foo=""):
     return embed
 
 @client.event
+async def on_ready():
+    print('Logged in as')
+    print(client.user.name)
+    print(client.user.id)
+    print('------')
+
+@client.event
 async def on_message(message):
+    '''ch = client.get_channel(701698774711402507)
+    if message.channel == ch:
+        return
+    await ch.send("[%s:%s:%s:%s] %s" %(time.strftime('%c', time.localtime(time.time())),message.guild,message.channel,message.author,message.content))
+    '''
     if message.author == client.user:
         return
     elif (message.content.split()[0]=="!embed"):
@@ -33,8 +55,8 @@ async def on_message(message):
             await message.channel.send(embed=eval('embed(%s,foo="%s님의 임베드")' % (message.content.split(maxsplit=1)[1],message.author)))
             await message.delete()
         except:
-            await message.channel.send("님 잘못쓴듯 아니면 봇 오류입니다")
-    '''if message.content.startswith('!투표'):
+           await message.channel.send("잘못된 구문입니다.")
+    if message.content.startswith('!투표'):
         if True:
             await message.delete()
             qjsgh = 0
@@ -77,7 +99,7 @@ async def on_message(message):
                                                     if qjsgh == 10:
                                                         await choose.add_reaction('🔟')
                                                     else:
-                                                        await choose.add_reaction('🔢')'''
+                                                        await choose.add_reaction('🔢')
 
 #access_token=os.environ["BOT_TOKEN"]
 client.run("NzAwOTUyNzAxMzg2NzUyMDYw."+"Xp8INQ.AMWgUYw-ZcjZ3JYooghsutFPTPI")
