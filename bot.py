@@ -2,18 +2,45 @@ import discord
 import asyncio
 import time
 import os
-#from math import *
+import json
+
+client=discord.Client()
+
+class vote:
+    def __init__(self,subj,votes):
+        self.subj = subj
+        self.votes = votes
+        self.votesAndCheck = []
+        for i in self.votes:
+            self.votesAndCheck.append([i,0])
+
+    def getEmbed(self):
+        self.embed = discord.Embed(title='주제 - [' + self.subj + ']', color=0x62c1cc)
+        vote = self.votes
+        for i in range(0, len(vote)):
+            self.embed.add_field(name=i+1, value=vote[i], inline=False)
+        return self.embed
+    
+    def getVotes(self):
+        return self.votesAndCheck
+    
+    def getJson(self):
+        self.json = {"subj":self.subj,"votes":self.votes,"votesAndCheck":self.votesAndCheck}
+        return self.json
+    def setByJson(self,jsonfile):
+        self.subj = jsonfile.get('subj')
+        self.votes = jsonfile.get('votes')
+        self.votesAndCheck = jsonfile.get('votesAndCheck')
+try:
+    with open("vote_data.json", "r") as vote_json:
+        vote_python = json.load(vote_json)
+    nowvote = vote("",[""])
+    nowvote.setByJson(vote_python)
+except FileNotFoundError:
+    nowvote=""
 
 def doesNothing(txt):
     return txt
-client=discord.Client()
-
-def bmj():
-    mym=""
-    for i in range(random.randrange(15)):
-        int(i)
-        mym = mym+chr(random.randrange(0xAC00,0xD7A4))
-    return mym
 
 @client.event
 async def on_ready():
@@ -35,19 +62,8 @@ def embed(title="제목",*args,des="",color=0x62c1cc,foo=""):
     return embed
 
 @client.event
-async def on_ready():
-    print('Logged in as')
-    print(client.user.name)
-    print(client.user.id)
-    print('------')
-
-@client.event
 async def on_message(message):
-    '''ch = client.get_channel(701698774711402507)
-    if message.channel == ch:
-        return
-    await ch.send("[%s:%s:%s:%s] %s" %(time.strftime('%c', time.localtime(time.time())),message.guild,message.channel,message.author,message.content))
-    '''
+    global nowvote
     if message.author == client.user:
         return
     elif (message.content.split()[0]=="!embed"):
@@ -56,49 +72,47 @@ async def on_message(message):
             await message.delete()
         except Exception as inst:
             await message.channel.send("%s" % inst)
-    if message.content.startswith('!투표'):
-        if True:
+    if message.content.split()[0] == '!투표':
+        if nowvote == "":
             await message.delete()
-            qjsgh = 0
-            vote = message.content[4:].split("/")
-            embed = discord.Embed(title='주제 - [' + vote[0] + ']', color=0x62c1cc)
-            for i in range(1, len(vote)):
-                qjsgh += 1
-                embed.add_field(name=qjsgh, value=vote[i], inline=False)
-            choose = await message.channel.send(embed=embed)
-            qjsgh = 0
-            for i in range(1, len(vote)):
-                qjsgh += 1
-                if qjsgh == 1:
-                    await choose.add_reaction('1️⃣')
-                else:
-                    if qjsgh == 2:
-                        await choose.add_reaction('2️⃣')
-                    else:
-                        if qjsgh == 3:
-                            await choose.add_reaction('3️⃣')
-                        else:
-                            if qjsgh == 4:
-                                await choose.add_reaction('4️⃣')
-                            else:    
-                                if qjsgh == 5:
-                                    await choose.add_reaction('5️⃣')
-                                else:    
-                                    if qjsgh == 6:
-                                        await choose.add_reaction('6️⃣')
-                                    else:
-                                        if qjsgh == 7:
-                                            await choose.add_reaction('7️⃣')
-                                        else:
-                                            if qjsgh == 8:
-                                                await choose.add_reaction('8️⃣')
-                                            else:
-                                                if qjsgh == 9:
-                                                    await choose.add_reaction('9️⃣')
-                                                else:    
-                                                    if qjsgh == 10:
-                                                        await choose.add_reaction('🔟')
-                                                    else:
-                                                        await choose.add_reaction('🔢')
+            votes = []
+            for i in (message.content[4:].split("/")[1:]): #[1:]):
+                votes.append(i)
+            nowvote = vote(message.content[4:].split("/")[0],votes)
+            await message.channel.send(embed=nowvote.getEmbed())
+        else:
+            await message.channel.send("이미 진행중인 투표가 있습니다.")
+    if message.content.startswith("!투표하기"):
+        if len(message.content.split()) <= 1:
+            await message.channel.send("1~%d번의 숫자를 골라주세요." % len(nowvote.votes))
+            return
+        if (message.content.split()[1]).isdecimal():
+            try:
+                nowvote.votesAndCheck[int(message.content.split()[1])-1][1] += 1
+                if int(message.content.split()[1]) < 1:
+                    raise IndexError
+                await message.delete()
+                await message.author.send("성공적으로 %s번에 투표했습니다." % message.content.split()[1])
+            except IndexError:
+                await message.channel.send("1~%d번의 숫자를 골라주세요." % len(nowvote.votes))
+            with open("vote_data.json", "w") as json_file:
+                json.dump(nowvote.getJson(),json_file)
+        else:
+            await message.channel.send("1~%d번의 숫자를 골라주세요." % len(nowvote.votes))
+    if message.content.startswith("!투표제거"):
+        nowvote = ""
+        os.remove("vote_data.json")
+        await message.channel.send("투표가 제거되었습니다.")
+    if message.content.startswith("!투표보기"):
+        if nowvote == "":
+            message.channel.send("현재 진행중인 투표가 없습니다.")
+        await message.channel.send(embed=nowvote.getEmbed())
+    if message.content.startswith("!투표수"):
+        await message.channel.send(nowvote.getVotes())
+        await message.channel.send("이 기능은 삭제예정입니다. 디버그를 위해 넣어놓은 기능")
+    if message.content.startswith("!투표json"):
+        await message.channel.send("test")
+        with open("vote_data.json", "w") as json_file:
+            json.dump(nowvote.getJson(),json_file)
 access_token=os.environ["BOT_TOKEN"]
 client.run(access_token)
