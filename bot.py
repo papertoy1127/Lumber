@@ -115,6 +115,5 @@ async def on_message(message):
         with open("vote_data.json", "w") as json_file:
             json.dump(nowvote.getJson(),json_file)
 
-            
 access_token=os.environ["BOT_TOKEN"]
 client.run(access_token)
