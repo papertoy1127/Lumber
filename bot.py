@@ -112,8 +112,8 @@ async def on_message(message):
             await message.channel.send("1~%d번의 숫자를 골라주세요." % len(nowvote.votes))
     if message.content.startswith("!투표제거"):
         nowvote = ""
-        os.remove("vote_data.json")
         await message.channel.send("투표가 제거되었습니다.")
+        os.remove("vote_data.json")
     if message.content.startswith("!투표보기"):
         if nowvote == "":
             message.channel.send("현재 진행중인 투표가 없습니다.")
