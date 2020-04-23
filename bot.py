@@ -16,7 +16,8 @@ class vote:
             self.votesAndCheck.append([i,0])
 
     def getEmbed(self):
-        self.embed = discord.Embed(title='주제 - [' + self.subj + ']', color=0x62c1cc, footer="/투표하기 <번호> 명령어로 투표하세요!")
+        self.embed = discord.Embed(title='주제 - [' + self.subj + ']', color=0x62c1cc)
+        embed.set_footer(text="투표하기 <번호> 명령어로 투표하세요!")
         vote = self.votes
         for i in range(0, len(vote)):
             self.embed.add_field(name=i+1, value=vote[i], inline=False)
