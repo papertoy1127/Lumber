@@ -9,7 +9,7 @@ admin = "Manager"
 @bot.event
 async def on_ready():
     print("Ready!")
-    await bot.change_presence(status=discord.Status.dnd, activity=discord.Game('???help'))
+    await bot.change_presence(status=discord.Status.dnd, activity=discord.Game('??commands'))
 
 @bot.command(pass_context=True)
 async def rank(ctx, *args):
@@ -41,8 +41,10 @@ async def clear(ctx, amount):
             raise E
             #await ctx.send('권한이 부족합니다!' + str(E))
 @bot.command(pass_context=True)
-async def help(ctx, amount):
-        await ctx.send(embed=discord.Embed(title='명령어 목록', description='???Rank \(Map Editor/Gamer\): 역할을 지급합니다.', footer='Made by PAPER_PPT_'))
-            
+async def commands(ctx):
+        em = discord.Embed(title='명령어 목록', description='???Rank \(Map Editor/Gamer\): 역할을 지급합니다.\n')
+        em.set_footer(text='Made by PAPER_PPT_')
+        await ctx.send(embed=em)
+        
 access_token = os.environ["BOT_TOKEN"]
 bot.run(access_token, bot=True, reconnect=True)
