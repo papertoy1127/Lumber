@@ -23,10 +23,12 @@ async def rank(ctx, *args):
         giveRole = discord.utils.get(ctx.guild.roles, name=role)
         if giveRole in ctx.author.roles:
             await ctx.author.remove_roles(giveRole)
-            await ctx.send(embed=discord.Embed(description = ctx.author.mention + ' 님에게 ' + giveRole.mention + '역할이 지급되었습니다.'))
+            await ctx.send(embed=discord.Embed(description = ctx.author.mention + ' 님에게서 ' + giveRole.mention + '역할이 삭제되었습니다.'))
         else:
             await ctx.author.add_roles(giveRole)
-            await ctx.send(embed=discord.Embed(description = ctx.author.mention + ' 님에게서 ' + giveRole.mention + '역할이 삭제되었습니다.'))
+            await ctx.send(embed=discord.Embed(description = ctx.author.mention + ' 님에게 ' + giveRole.mention + '역할이 지급되었습니다.'))
+    else:
+        await ctx.send(embed=discord.Embed(description = '지급이 불가능한 역할입니다.'))
 @bot.command(pass_context=True)
 async def clear(ctx, amount):
         adminRole = discord.utils.get(ctx.guild.roles, name=admin)
