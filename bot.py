@@ -7,7 +7,8 @@ admin = "Manager"
 
 @bot.event
 async def on_ready():
-  print("Ready!")
+    print("Ready!")
+    await bot.change_presence(status=discord.Status.dnd, activity=discord.Game('테스트'))
 
 @bot.command(pass_context=True)
 async def rank(ctx, *args):
@@ -21,6 +22,7 @@ async def rank(ctx, *args):
         giveRole = discord.utils.get(ctx.guild.roles, name=role)
         if giveRole in ctx.author.roles:
             await ctx.author.remove_roles(giveRole)
+            await ctx.send(role + '역할이 지급되었습니다.')
         else:
             await ctx.author.add_roles(giveRole)
 @bot.command(pass_context=True)
