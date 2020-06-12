@@ -35,5 +35,5 @@ async def clear(ctx, amount):
             raise E
             #await ctx.send('권한이 부족합니다!' + str(E))
 
-access_token = 'NzAwNTM1OTA3MjExODA0Njcy.XuMO9A.NVkPZSXZv9MRiN314xVzUJh22Iw'
+access_token = os.environ["BOT_TOKEN"]
 bot.run(access_token, bot=True, reconnect=True)
