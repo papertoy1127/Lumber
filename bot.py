@@ -26,6 +26,7 @@ async def rank(ctx, *args):
             await ctx.send(role + '역할이 지급되었습니다.')
         else:
             await ctx.author.add_roles(giveRole)
+            await ctx.send(role + '역할이 되었습니다.')
 @bot.command(pass_context=True)
 async def clear(ctx, amount):
         adminRole = discord.utils.get(ctx.guild.roles, name=admin)
