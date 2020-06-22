@@ -52,6 +52,7 @@ async def addWhitelistedRole(ctx, r):
                 whiteListedRoles.append(r)
             else:
                 raise Exception('권한이 부족합니다!')
+        except Exception as E:
             await ctx.send(str(E))
         
 access_token = os.environ["BOT_TOKEN"]
