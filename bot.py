@@ -48,7 +48,7 @@ async def commands(ctx):
 @bot.command(pass_context=True)
 async def addWhitelistedRole(ctx, r):
         try:
-            if ctx.message.author.server_permissions.administrator:
+            if discord.utils.get(ctx.guild.roles, name='Bot') in ctx.author.roles:
                 whiteListedRoles.append(r)
                 await ctx.send(embed=discord.Embed(description = '%s 역할이 화이트리스트에 추가되었습니다.' % r))
             else:
@@ -58,7 +58,7 @@ async def addWhitelistedRole(ctx, r):
 @bot.command(pass_context=True)
 async def removeWhitelistedRole(ctx, r):
         try:
-            if ctx.message.author.server_permissions.administrator:
+            if discord.utils.get(ctx.guild.roles, name='Bot') in ctx.author.roles:
                 try:
                     whiteListedRoles.remove(r)
                     await ctx.send(embed=discord.Embed(description = '%s 역할이 화이트리스트에서 삭제되었습니다.' % r))
