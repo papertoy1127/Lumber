@@ -3,7 +3,7 @@ import os
 from discord.ext import commands
 
 bot = commands.Bot(command_prefix="???", case_insensitive=True)
-whiteListedRoles = ["Map Editor", "Gamer"]
+whiteListedRoles = ["Map Editor", "Gamer", "Mention"]
 admin = "Manager"
 
 @bot.event
@@ -45,6 +45,14 @@ async def commands(ctx):
         em = discord.Embed(title='명령어 목록', description='???Rank \(Map Editor/Gamer\): 역할을 지급합니다.\n')
         em.set_footer(text='Made by PAPER_PPT_')
         await ctx.send(embed=em)
+@bot.command(pass_context=True)
+async def addWhitelistedRole(ctx, r):
+        try:
+            if ctx.message.author.server_permissions.administrator:
+                whiteListedRoles.append(r)
+            else:
+                raise Exception('권한이 부족합니다!')
+            await ctx.send(str(E))
         
 access_token = os.environ["BOT_TOKEN"]
 bot.run(access_token, bot=True, reconnect=True)
