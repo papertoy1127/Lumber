@@ -9,7 +9,7 @@ admin = "Manager"
 @bot.event
 async def on_ready():
     print("Ready!")
-    await bot.change_presence(status=discord.Status.dnd, activity=discord.Game('v0.2.2'))
+    await bot.change_presence(status=discord.Status.dnd, activity=discord.Game('v0.2.3'))
 
 @bot.command(pass_context=True)
 async def rank(ctx, *args):
@@ -47,27 +47,29 @@ async def commands(ctx):
         await ctx.send(embed=em)
 @bot.command(pass_context=True)
 async def addWhitelistedRole(ctx, r):
-        try:
-            if discord.utils.get(ctx.guild.roles, name='Bot') in ctx.author.roles:
-                whiteListedRoles.append(r)
-                await ctx.send(embed=discord.Embed(description = '%s 역할이 화이트리스트에 추가되었습니다.' % r))
-            else:
-                raise Exception('권한이 부족합니다!')
-        except Exception as E:
-            await ctx.send(str(E))
+    global whiteListedRoles
+    try:
+        if discord.utils.get(ctx.guild.roles, name='Bot') in ctx.author.roles:
+            whiteListedRoles.append(r)
+            await ctx.send(embed=discord.Embed(description = '%s 역할이 화이트리스트에 추가되었습니다.' % r))
+        else:
+            raise Exception('권한이 부족합니다!')
+    except Exception as E:
+        await ctx.send(str(E))
 @bot.command(pass_context=True)
 async def removeWhitelistedRole(ctx, r):
-        try:
-            if discord.utils.get(ctx.guild.roles, name='Bot') in ctx.author.roles:
-                try:
-                    whiteListedRoles.remove(r)
-                    await ctx.send(embed=discord.Embed(description = '%s 역할이 화이트리스트에서 삭제되었습니다.' % r))
-                except ValueError:
-                    await ctx.send(embed=discord.Embed(description = '화이트리스트되지 않은 역할입니다.' % r))
-            else:
-                raise Exception('권한이 부족합니다!')
-        except Exception as E:
-            await ctx.send(str(E))
+    global whiteListedRoles
+    try:
+        if discord.utils.get(ctx.guild.roles, name='Bot') in ctx.author.roles:
+            try:
+                whiteListedRoles.remove(r)
+                await ctx.send(embed=discord.Embed(description = '%s 역할이 화이트리스트에서 삭제되었습니다.' % r))
+            except ValueError:
+                await ctx.send(embed=discord.Embed(description = '화이트리스트되지 않은 역할입니다.' % r))
+        else:
+            raise Exception('권한이 부족합니다!')
+    except Exception as E:
+        await ctx.send(str(E))
         
 access_token = os.environ["BOT_TOKEN"]
 bot.run(access_token, bot=True, reconnect=True)
