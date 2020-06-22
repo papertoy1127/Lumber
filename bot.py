@@ -9,7 +9,7 @@ admin = "Manager"
 @bot.event
 async def on_ready():
     print("Ready!")
-    await bot.change_presence(status=discord.Status.dnd, activity=discord.Game('v0.2.1'))
+    await bot.change_presence(status=discord.Status.dnd, activity=discord.Game('v0.2.2'))
 
 @bot.command(pass_context=True)
 async def rank(ctx, *args):
