@@ -55,7 +55,7 @@ async def addWhitelistedRole(ctx, r):
                 raise Exception('권한이 부족합니다!')
         except Exception as E:
             await ctx.send(str(E))
-@bot.command(pass_context=True)
+'''@bot.command(pass_context=True)
 async def addWhitelistedRole(ctx, r):
         try:
             if ctx.message.author.server_permissions.administrator:
@@ -67,7 +67,7 @@ async def addWhitelistedRole(ctx, r):
             else:
                 raise Exception('권한이 부족합니다!')
         except Exception as E:
-            await ctx.send(str(E))
+            await ctx.send(str(E))'''
         
 access_token = os.environ["BOT_TOKEN"]
 bot.run(access_token, bot=True, reconnect=True)
