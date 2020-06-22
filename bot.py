@@ -50,6 +50,20 @@ async def addWhitelistedRole(ctx, r):
         try:
             if ctx.message.author.server_permissions.administrator:
                 whiteListedRoles.append(r)
+                await ctx.send(embed=discord.Embed(description = '%s 역할이 화이트리스트에 추가되었습니다.' % r))
+            else:
+                raise Exception('권한이 부족합니다!')
+        except Exception as E:
+            await ctx.send(str(E))
+@bot.command(pass_context=True)
+async def addWhitelistedRole(ctx, r):
+        try:
+            if ctx.message.author.server_permissions.administrator:
+                try:
+                    whiteListedRoles.remove(r)
+                    await ctx.send(embed=discord.Embed(description = '%s 역할이 화이트리스트에서 삭제되었습니다.' % r))
+                except ValueError:
+                    await ctx.send(embed=discord.Embed(description = '화이트리스트되지 않은 역할입니다.' % r))
             else:
                 raise Exception('권한이 부족합니다!')
         except Exception as E:
