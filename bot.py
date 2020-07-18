@@ -3,7 +3,7 @@ import os
 from discord.ext import commands
 
 bot = commands.Bot(command_prefix="???", case_insensitive=True)
-whiteListedRoles = ["Map Editor", "Gamer", "Mention"]
+whiteListedRoles = ["Map Editor", "Gamer", "mention"]
 admin = "Manager"
 
 @bot.event
