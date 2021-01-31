@@ -71,5 +71,5 @@ async def removeWhitelistedRole(ctx, r):
     except Exception as E:
         await ctx.send(str(E))
         
-access_token = "NzAwNTM1OTA3MjExODA0Njcy.XpkW5w" + ".dc5Mx8CzsjPHq0D1_qcF60L-Ws4" #os.environ["BOT_TOKEN"]
+access_token = os.environ["BOT_TOKEN"]
 bot.run(access_token, bot=True, reconnect=True)
